@@ -1,7 +1,9 @@
 ## Documentation
 
-base on the vue-js-panel <a href="https://64robots.github.io/vue-js-panel/">docs</a>.
+based on the <a href="https://github.com/64robots/vue-js-panel">vue-js-panel</a>
+you can check out the <a href="https://64robots.github.io/vue-js-panel/">docs</a>.
 
+## install
 `npm install --save vue3-js-panel`
 
 >這是Vue3的版本，因為原本的`this.$slots.default[0].elm`在vue3上會拿到undefined所以改寫法，
