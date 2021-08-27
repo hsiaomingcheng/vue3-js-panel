@@ -8,7 +8,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build-libary": "vue-cli-service build --target lib --name vue3-js-panel ./src/components/index.js"
+    "build-libary": "vue-cli-service build --target lib --name vue3-js-panel ./src/components/index.js",
+    "build:doc": "vue-cli-service build ./src/main.js --dest docs --mode development"
   },
   "repository": {
     "type": "git",
