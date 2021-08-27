@@ -2,6 +2,8 @@
 
 based on the <a href="https://github.com/64robots/vue-js-panel">vue-js-panel</a>
 you can check out the <a href="https://64robots.github.io/vue-js-panel/">docs</a>.
+<br>
+<a href="https://hsiaomingcheng.github.io/vue3-js-panel/">Demo</a>.
 
 ## install
 
