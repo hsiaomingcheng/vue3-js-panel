@@ -2,42 +2,60 @@
   <img alt="Vue logo" src="./assets/logo.png">
   <h1>vue3-js-panel</h1>
 
-  <button @click="triggerPanel">open panel</button>
+  <h2>多開範例</h2>
+  <button
+    v-for="item in testPanelArray"
+    :key="item.id"
+    @click="triggerPanel(item)"
+  >
+    open {{ item.content }}
+  </button>
 
-  {{obj.show}}
-
-  <JsPanel :visible="obj.show" :options="options" @close="obj.show = false">
-    <div>My awesome content</div>
+  <JsPanel
+    v-for="item in testPanelArray"
+    :key="item.id"
+    :visible="item.visible"
+    :options="item.options"
+    @close="item.visible = false"
+  >
+    <div>{{item.content}}</div>
   </JsPanel>
 </template>
 
-<script>
+<script setup>
 import { reactive } from 'vue'
 import JsPanel from './components/JsPanel.vue'
 import 'jspanel4/dist/jspanel.min.css'
 
-export default {
-  name: 'App',
-  components: { JsPanel },
-  setup() {
-    const obj = reactive({ 
-      show: false 
-    })
-
-    const options = {
-      headerTitle: 'Aesome Panel',
+const testPanelArray = reactive([
+  {
+    id: 'a-content',
+    content: 'A panel content',
+    visible: false,
+    options: {
+      headerTitle: 'A Panel'
     }
-
-    const triggerPanel = () => {
-      obj.show = true
+  },
+  {
+    id: 'b-content',
+    content: 'B panel content',
+    visible: false,
+    options: {
+      headerTitle: 'B Panel'
     }
-
-    return {
-      obj,
-      options,
-      triggerPanel
+  },
+  {
+    id: 'c-content',
+    content: 'C panel content',
+    visible: false,
+    options: {
+      headerTitle: 'C Panel'
     }
   }
+])
+
+const triggerPanel = (item) => {
+  item.visible = true
 }
 </script>
 
