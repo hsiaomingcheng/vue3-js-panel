@@ -1,6 +1,6 @@
 {
   "name": "vue3-js-panel",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "author": "Chsir <hsiao516@gmail.com>",
   "description": "A Vue component for jsPanel, base on vue-js-panel https://www.npmjs.com/package/vue-js-panel",
   "main": "dist/vue3-js-panel.common.js",
