@@ -17,14 +17,85 @@ you can check out the <a href="https://64robots.github.io/vue-js-panel/">docs</a
 ## example
 
 ```javascript
-import VueJsPanel from 'vue-js-panel/src'
-import 'jspanel4/dist/jspanel.min.css'
+// components/JsPanel.vue 建立一個JsPanel的component
 
-app.use(VueJsPanel)
+<template>
+  <div v-if="visible" ref="default">
+    <slot name="default" />
+    <slot v-if="false" name="headerToolbar" />
+  </div>
+</template>
+<script>
+import { jsPanel } from 'jspanel4/es6module/jspanel.min.js'
+
+export default {
+  name: 'JsPanel',
+
+  props: {
+    visible: {
+      type: Boolean,
+      default: false
+    },
+
+    options: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+
+  computed: {
+    panelOptions() {
+      return Object.assign({ onclosed: this.close }, this.options)
+    }
+  },
+
+  watch: {
+    visible(isVisible) {
+      if (isVisible) {
+        this.createPanel()
+      }
+    }
+  },
+
+  mounted() {
+    if (this.visible) {
+      this.createPanel()
+    }
+  },
+
+  methods: {
+    async createPanel() {
+      await this.$nextTick()
+
+      let options = Object.assign(
+        { content: this.$refs.default },
+        this.panelOptions
+      )
+
+      if (this.$slots.headerToolbar) {
+        options = Object.assign(
+          { headerToolbar: this.$slots.headerToolbar()[0].el },
+          options
+        )
+      }
+      jsPanel.create(options)
+    },
+
+    close() {
+      this.$emit('close')
+      this.$emit('update:visible', false)
+    }
+  }
+}
+</script>
+
 ```
 
 ```javascript
 <template>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <h1>vue3-js-panel</h1>
+
   <button @click="triggerPanel">open panel</button>
 
   {{obj.show}}
@@ -36,22 +107,22 @@ app.use(VueJsPanel)
 
 <script>
 import { reactive } from 'vue'
+import JsPanel from './components/JsPanel.vue'
+import 'jspanel4/dist/jspanel.min.css'
 
 export default {
   name: 'App',
-  setup() {
-    const obj = reactive({ 
-      show: false 
+  components: { JsPanel },
+  setup () {
+    const obj = reactive({
+      show: false
     })
-
     const options = {
-      headerTitle: 'Aesome Panel',
+      headerTitle: 'Aesome Panel'
     }
-
     const triggerPanel = () => {
       obj.show = true
     }
-
     return {
       obj,
       options,
