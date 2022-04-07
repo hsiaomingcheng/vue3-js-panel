@@ -16,6 +16,7 @@ you can check out the <a href="https://64robots.github.io/vue-js-panel/">docs</a
 
 ## example
 
+個別註冊
 ```javascript
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
@@ -33,6 +34,47 @@ you can check out the <a href="https://64robots.github.io/vue-js-panel/">docs</a
 import { reactive } from 'vue'
 import { JsPanel } from 'vue3-js-panel'
 import 'jspanel4/dist/jspanel.min.css'
+
+const obj = reactive({
+  show: false
+})
+const options = {
+  headerTitle: 'Aesome Panel'
+}
+const triggerPanel = () => {
+  obj.show = true
+}
+</script>
+```
+
+全域註冊
+```javascript
+import { createApp } from 'vue'
+import App from './App.vue'
+
+import Vue3JsPanel  from 'vue3-js-panel'
+import 'jspanel4/dist/jspanel.min.css'
+
+const app = createApp(App)
+
+app.use(Vue3JsPanel)
+app.mount('#app')
+```
+```javascript
+<template>
+  <img alt="Vue logo" src="./assets/logo.png">
+
+  <div>
+    <button @click="triggerPanel">open panel</button>
+  </div>
+
+  <JsPanel :visible="obj.show" :options="options" @close="obj.show = false">
+    <div>123 My awesome content</div>
+  </JsPanel>
+</template>
+
+<script setup>
+import { reactive } from 'vue'
 
 const obj = reactive({
   show: false
