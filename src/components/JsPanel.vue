@@ -1,7 +1,7 @@
 <template>
   <div v-if="visible" ref="default">
     <slot name="default" />
-    <slot v-if="false" name="headerToolbar" />
+    <slot name="headerToolbar" />
   </div>
 </template>
 <script>

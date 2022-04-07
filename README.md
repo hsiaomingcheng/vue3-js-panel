@@ -155,6 +155,21 @@ const triggerPanel = (item) => {
 
 ---
 
+## headerToolbar slot
+```javascript
+<JsPanel :visible="obj.show" :options="options" @close="obj.show = false">
+  <div>123 My awesome contentAA</div>
+
+  <template v-slot:headerToolbar>
+    <div class="custom-header-toolbar">
+      <span>File</span> <span>Edit</span> <span>About</span>
+    </div>
+  </template>
+</JsPanel>
+```
+
+---
+
 ## 這是配合slot的用法
 
 template v-slot的`default`對應到jsPanel.vue的template的`ref`跟`name`也對應到`content`
