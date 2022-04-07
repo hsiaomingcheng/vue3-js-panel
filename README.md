@@ -17,118 +17,31 @@ you can check out the <a href="https://64robots.github.io/vue-js-panel/">docs</a
 ## example
 
 ```javascript
-// components/JsPanel.vue 建立一個JsPanel的component
-
-<template>
-  <div v-if="visible" ref="default">
-    <slot name="default" />
-    <slot v-if="false" name="headerToolbar" />
-  </div>
-</template>
-<script>
-import { jsPanel } from 'jspanel4/es6module/jspanel.min.js'
-
-export default {
-  name: 'JsPanel',
-
-  props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
-
-    options: {
-      type: Object,
-      default: () => ({})
-    }
-  },
-
-  computed: {
-    panelOptions() {
-      return Object.assign({ onclosed: this.close }, this.options)
-    }
-  },
-
-  watch: {
-    visible(isVisible) {
-      if (isVisible) {
-        this.createPanel()
-      }
-    }
-  },
-
-  mounted() {
-    if (this.visible) {
-      this.createPanel()
-    }
-  },
-
-  methods: {
-    async createPanel() {
-      await this.$nextTick()
-
-      let options = Object.assign(
-        { content: this.$refs.default },
-        this.panelOptions
-      )
-
-      if (this.$slots.headerToolbar) {
-        options = Object.assign(
-          { headerToolbar: this.$slots.headerToolbar()[0].el },
-          options
-        )
-      }
-      jsPanel.create(options)
-    },
-
-    close() {
-      this.$emit('close')
-      this.$emit('update:visible', false)
-    }
-  }
-}
-</script>
-
-```
-
-```javascript
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <h1>vue3-js-panel</h1>
 
-  <button @click="triggerPanel">open panel</button>
-
-  {{obj.show}}
+  <div>
+    <button @click="triggerPanel">open panel</button>
+  </div>
 
   <JsPanel :visible="obj.show" :options="options" @close="obj.show = false">
-    <div>My awesome content</div>
+    <div>123 My awesome content</div>
   </JsPanel>
 </template>
 
-<script>
+<script setup>
 import { reactive } from 'vue'
-import JsPanel from './components/JsPanel.vue'
+import { JsPanel } from 'vue3-js-panel'
 import 'jspanel4/dist/jspanel.min.css'
 
-export default {
-  name: 'App',
-  components: { JsPanel },
-  setup () {
-    const obj = reactive({
-      show: false
-    })
-    const options = {
-      headerTitle: 'Aesome Panel'
-    }
-    const triggerPanel = () => {
-      obj.show = true
-    }
-    return {
-      obj,
-      options,
-      triggerPanel
-    }
-  }
+const obj = reactive({
+  show: false
+})
+const options = {
+  headerTitle: 'Aesome Panel'
+}
+const triggerPanel = () => {
+  obj.show = true
 }
 </script>
 ```
@@ -162,7 +75,7 @@ export default {
 
 <script setup>
 import { reactive } from 'vue'
-import JsPanel from './components/JsPanel.vue'
+import { JsPanel } from 'vue3-js-panel'
 import 'jspanel4/dist/jspanel.min.css'
 
 const testPanelArray = reactive([
